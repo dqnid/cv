@@ -1,0 +1,227 @@
+%-----------------------------------------------------------------------------------------------------------------------------------------------%
+%	The MIT License (MIT)
+%
+%	Copyright (c) 2021 Jitin Nair
+%
+%	Permission is hereby granted, free of charge, to any person obtaining a copy
+%	of this software and associated documentation files (the "Software"), to deal
+%	in the Software without restriction, including without limitation the rights
+%	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+%	copies of the Software, and to permit persons to whom the Software is
+%	furnished to do so, subject to the following conditions:
+%
+%	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+%	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+%	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+%	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+%	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+%	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+%	THE SOFTWARE.
+%
+%
+%-----------------------------------------------------------------------------------------------------------------------------------------------%
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT DEFINITION
+%----------------------------------------------------------------------------------------
+
+% article class because we want to fully customize the page and not use a cv template
+\documentclass[a4paper,12pt]{article}
+
+%----------------------------------------------------------------------------------------
+%	FONT
+%----------------------------------------------------------------------------------------
+
+% % fontspec allows you to use TTF/OTF fonts directly
+% \usepackage{fontspec}
+% \defaultfontfeatures{Ligatures=TeX}
+
+% % modified for ShareLaTeX use
+% \setmainfont[
+% SmallCapsFont = Fontin-SmallCaps.otf,
+% BoldFont = Fontin-Bold.otf,
+% ItalicFont = Fontin-Italic.otf
+% ]
+% {Fontin.otf}
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES
+%----------------------------------------------------------------------------------------
+\usepackage{url}
+\usepackage{parskip}
+
+%other packages for formatting
+\RequirePackage{color}
+\RequirePackage{graphicx}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[scale=0.9]{geometry}
+
+%tabularx environment
+\usepackage{tabularx}
+
+%for lists within experience section
+\usepackage{enumitem}
+
+% centered version of 'X' col. type
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+%to prevent spillover of tabular into next pages
+\usepackage{supertabular}
+\usepackage{tabularx}
+\newlength{\fullcollw}
+\setlength{\fullcollw}{0.47\textwidth}
+
+%custom \section
+\usepackage{titlesec}
+\usepackage{multicol}
+\usepackage{multirow}
+
+%CV Sections inspired by:
+%http://stefano.italians.nl/archives/26
+\titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{10pt}{10pt}
+
+%for publications
+\usepackage[style=authoryear,sorting=ynt, maxbibnames=2]{biblatex}
+
+%Setup hyperref package, and colours for links
+\usepackage[unicode, draft=false]{hyperref}
+\definecolor{linkcolour}{rgb}{0,0.2,0.6}
+\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour,linkcolor=linkcolour}
+\addbibresource{citations.bib}
+\setlength\bibitemsep{1em}
+
+%for social icons
+\usepackage{fontawesome5}
+
+%debug page outer frames
+%\usepackage{showframe}
+
+
+% job listing environments
+\newenvironment{jobshort}[2]
+    {
+    \begin{tabularx}{\linewidth}{@{}l X r@{}}
+    \textbf{#1} & \hfill &  #2 \\[3.75pt]
+    \end{tabularx}
+    }
+    {
+    }
+
+\newenvironment{joblong}[2]
+    {
+    \begin{tabularx}{\linewidth}{@{}l X r@{}}
+    \textbf{#1} & \hfill &  #2 \\[3.75pt]
+    \end{tabularx}
+    \begin{minipage}[t]{\linewidth}
+    \begin{itemize}[nosep,after=\strut, leftmargin=1em, itemsep=3pt,label=--]
+    }
+    {
+    \end{itemize}
+    \end{minipage}
+    }
+
+
+
+%----------------------------------------------------------------------------------------
+%	BEGIN DOCUMENT
+%----------------------------------------------------------------------------------------
+\begin{document}
+
+% non-numbered pages
+\pagestyle{empty}
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+% \begin{tabularx}{\linewidth}{ @{}X X@{} }
+% \huge{Your Name}\vspace{2pt} & \hfill \emoji{incoming-envelope} email@email.com \\
+% \raisebox{-0.05\height}\faGithub\ username \ | \
+% \raisebox{-0.00\height}\faLinkedin\ username \ | \ \raisebox{-0.05\height}\faGlobe \ mysite.com  & \hfill \emoji{calling} number
+% \end{tabularx}
+
+\begin{tabularx}{\linewidth}{@{} C @{}}
+\Huge{Daniel Heras Quesada} \\[7.5pt]
+\href{https://github.com/dqnid}{\raisebox{-0.05\height}\faGithub\ dqnid} \ $|$ \
+\href{https://linkedin.com/in/daniel-heras-quesada}{\raisebox{-0.05\height}\faLinkedin\ daniel-heras-quesada} \ $|$ \
+\href{https://dqnid.com}{\raisebox{-0.05\height}\faGlobe \ dqnid.com} \ $|$ \
+\href{mailto:dani.heras@hotmail.com}{\raisebox{-0.05\height}\faEnvelope \ dani.heras@hotmail.com} \\
+\end{tabularx}
+
+%----------------------------------------------------------------------------------------
+% EXPERIENCE SECTIONS
+%----------------------------------------------------------------------------------------
+
+%Interests/ Keywords/ Summary
+\section{Summary}
+Software engineer and Linux enthusiast, specialized in web-technologies, currently working as a front-end developer.
+
+%Experience
+\section{Work Experience}
+
+\begin{jobshort}{Front-end Developer at Stradivarius}{Sep 2023 - present}
+I worked as a front-end consultant on key pages of their international e-Commerce web platform. It set a new standard on what a professional development workflow should look like.
+\end{jobshort}
+
+\begin{jobshort}{Front-end Developer at Axpe Consulting}{Jul 2023 - present}
+This was my first experience on the business. I started developing JS applications with a special focus on React as a library and NextJS as a framework.
+\end{jobshort}
+
+
+\begin{jobshort}{Internship as a Front End developer at Axpe}{May 2023 - Jul 2023}
+With a curricular internship where I had the opportunity to learn the most popular web technologies.
+\end{jobshort}
+
+\begin{joblong}{Internship as a Java Developer at CGB}{Jun 2023 - Aug 2023}
+\item Android development with Java.
+\item Back-end development with Java and Springboot.
+\end{joblong}
+
+%Projects
+\section{Projects}
+
+\begin{tabularx}{\linewidth}{ @{}l r@{} }
+\textbf{Outzone Team presentation site} & \hfill \href{https://outzone.es}{Link to live project} \\[3.75pt]
+\multicolumn{2}{@{}X@{}}{Dynamic website developed as a presentation site to the Outzone trial team. Also used as a training ground and rulebook explanation reference for Spanish cycling federation referees.}  \\
+\\
+\textbf{Full Stack Archetype} & \hfill \href{https://github.com/dqnid/full-stack-archetype}{Link to project repo} \\[3.75pt]
+\multicolumn{2}{@{}X@{}}{Full stack web development archetype. Develop with security and flexibility in mind.}  \\
+
+\end{tabularx}
+
+%----------------------------------------------------------------------------------------
+%	EDUCATION
+%----------------------------------------------------------------------------------------
+\section{Education}
+\begin{tabularx}{\linewidth}{@{}l X@{}}
+2018 - 2023 & Software Engineering Degree at \textbf{USAL} \hfill \\
+
+2025 & Complete SEO training course with Peter Kent at \textbf{Udemy} \hfill \\
+
+2024 & Advanced CSS and Sass course at \textbf{Udemy} \hfill \\
+
+2023 & Advanced React development course \hfill \\
+
+2022 & Course on Data Analysis with AI at \textbf{USAL} \hfill \\
+
+2018 & Cambridge English B2 Certificate \hfill  (SCORE: 166/170) \\
+
+\end{tabularx}
+
+%----------------------------------------------------------------------------------------
+%	SKILLS
+%----------------------------------------------------------------------------------------
+\section{Skills}
+\begin{tabularx}{\linewidth}{@{}l X@{}}
+Typescript &  \normalsize{Learned from the best professionals to make error-free projects.}\\
+React &  \normalsize{Refined by the requirements of high traffic e-commerce sites.}\\
+NextJS &  \normalsize{Used as the default React framework in most of my projects.}\\
+Git &  \normalsize{Used as the de facto version control system.}\\
+Docker &  \normalsize{Half learnt from professionals, half self-taught.}\\
+\end{tabularx}
+
+\vfill
+\center{\footnotesize Last updated: \today}
+
+\end{document}

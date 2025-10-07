@@ -1,0 +1,77 @@
+name: Compile CV
+
+on:
+  release:
+
+  issues:
+    types: [opened, edited, milestoned]
+
+  push:
+    branches:
+      - 'main'
+      - 'release/**'
+      - 'feature/**'
+
+permissions:
+  contents: write
+
+jobs:
+  pdf:
+    name: PDF
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout into git repository
+      uses: actions/checkout@v4
+    - name: Compile CV LaTeX to PDF
+      uses: xu-cheng/latex-action@v3
+      with:
+        root_file: cv.tex
+    - name: Upload CV
+      uses: actions/upload-artifact@v4
+      with:
+        name: cv_upload
+        path: cv.pdf
+
+  md:
+    name: Readme
+    runs-on: ubuntu-latest
+    container:
+      image: pandoc/latex:latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Compiles project to Markdown for the README
+      run: pandoc ./cv.tex -s -o README.rst
+    - name: Upload README
+      uses: actions/upload-artifact@v4
+      with:
+        name: readme_upload
+        path: README.rst
+
+  commit:
+    name: Commit
+    needs: [ "md", "pdf" ]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: readme_download
+      uses: actions/download-artifact@v5
+      with:
+        name: readme_upload
+    - name: cv_download
+      uses: actions/download-artifact@v5
+      with:
+        name: cv_upload
+    - name: Display folder
+      run: ls -R
+    - name: Set git identity
+      run: |
+        git config user.name 'github-actions[bot]'
+        git config user.email 'github-actions[bot]@users.noreply.github.com'
+        git add .
+        git commit -m "[BOT] 🤖 Automated README"
+    - name: Push
+      run: |
+        git remote set-url origin https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}
+        git push
