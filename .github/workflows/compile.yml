@@ -70,6 +70,7 @@ jobs:
         git push
   release:
     name: Release
+    needs: [ "commit" ]
     runs-on: ubuntu-latest
     steps:
       - name: Create release
